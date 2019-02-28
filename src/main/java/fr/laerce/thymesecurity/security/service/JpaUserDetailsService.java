@@ -52,8 +52,7 @@ public class JpaUserDetailsService implements UserDetailsService {
             log.info("{username: "+username+"| grp: "+grp.getRole());
             authorities.add(new SimpleGrantedAuthority(grp.getRole()));
         }
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.matches("p@ssw0rd", user.getPassword()));
+
 
         return new org.springframework.security.core.userdetails.User(
                 user.getName(),

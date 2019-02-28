@@ -40,13 +40,16 @@ public class UserController {
     }
     @GetMapping("/mod")
     public String modpassword(@RequestParam("id") long id,@RequestParam("password") String password,@RequestParam("password1") String password1,@RequestParam("password2") String password2){
-    if (password1.equals(password2)){
+        //on check que les 2 nouveau mdp sont les meme
+        if (password1.equals(password2)){
 
         User user = jpaUserService.findByUserId(id);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+    //on check que l'ancien mdp est le meme que celui de la bdd
         if (passwordEncoder.matches(password, user.getPassword())){
+            //on change le mdp
             user.setPassword(password1);
+            //on sauvegarde
             jpaUserService.save(user);
         }
 
