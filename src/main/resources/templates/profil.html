@@ -9,7 +9,7 @@
             <a  th:href="'/editpassword/'+${userU.getId()}">editer mon mdp</a>
         <p sec:authorize="hasAuthority('ADMIN')">Pour les ADMIN</p>
 
-        <p>Editer les mdp d'un utilisateur <select  sec:authorize="hasAuthority('ADMIN')" onchange="location = this.value;">
+        <p sec:authorize="hasAuthority('ADMIN')">Editer les mdp d'un utilisateur <select   onchange="location = this.value;">
             <option th:each="user2: ${users}"  th:value="'/editpassword/'+${user2.getId()}" th:text="${user2.getName()}"></option>
         </select>
         </p>
