@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <USER ID="1" NAME="Admin" PASSWORD="$2a$10$2jn5nIfdviqMTODpg21x..VISo2mlmVj9gF49A.LEpi6zDajJtT7W" MAIL="admin@laerce.fr" ACTIVE="true" />
+    <USER ID="2" NAME="User" PASSWORD="$2a$10$u5W45VYNM8ZR.6cHuzbQguY8CTPtaO3UEBZqgurBqZQOsGBl7N6YG" MAIL="user@laerce.fr" ACTIVE="true" />
+    <GROUPS ID="1" NAME="Administrators" ROLE="ADMIN" />
+    <GROUPS ID="2" NAME="Users" ROLE="USER" />
+    <USER_GROUP ID_USER="1" ID_GROUP="1" />
+    <USER_GROUP ID_USER="1" ID_GROUP="2" />
+    <USER_GROUP ID_USER="2" ID_GROUP="2" />
+</dataset>
