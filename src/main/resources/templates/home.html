@@ -9,9 +9,8 @@
          <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
          <p sec:authorize="hasAnyAuthority('ROLE_USER')">Pour tous les USER</p>
         <p sec:authorize="hasAuthority('ADMIN')">Pour les ADMIN</p>
-        <a sec:authorize="hasAuthority('ADMIN')" href="/profil">Edit tout profils</a>
         <p sec:authorize="isAuthenticated()">Pour tous les utilisateurs</p>
-        <a sec:authorize="isAuthenticated()" th:href="'/profil/'+${#authentication.getPrincipal().getUsername()}">Edit mon profil</a>
+        <a sec:authorize="isAuthenticated()" th:href="'/profil/'+${#authentication.getPrincipal().getUsername()}">voir mon profil</a>
 
     </body>
 </html>

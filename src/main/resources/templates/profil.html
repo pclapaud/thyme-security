@@ -4,16 +4,14 @@
         <title>Spring Security Example</title>
     </head>
     <body>
-        <h1>Welcome!</h1>
-
-         <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <h1>Welcome on your profil page!</h1>
          <p sec:authorize="hasAnyAuthority('ROLE_USER')">Pour tous les USER</p>
-            <a  th:href="'/editpassword/'+${userU.getId()}">editer mon profil</a>
-        <p sec:authorize="isAuthenticated()">Pour tous les utilisateurs </p>
-
+            <a  th:href="'/editpassword/'+${userU.getId()}">editer mon mdp</a>
         <p sec:authorize="hasAuthority('ADMIN')">Pour les ADMIN</p>
-        <select  sec:authorize="hasAuthority('ADMIN')" onchange="location = this.value;">
+
+        <p>Editer les mdp d'un utilisateur <select  sec:authorize="hasAuthority('ADMIN')" onchange="location = this.value;">
             <option th:each="user2: ${users}"  th:value="'/editpassword/'+${user2.getId()}" th:text="${user2.getName()}"></option>
         </select>
+        </p>
     </body>
 </html>
