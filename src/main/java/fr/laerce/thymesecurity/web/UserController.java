@@ -5,6 +5,7 @@ import fr.laerce.thymesecurity.security.dao.GroupDao;
 import fr.laerce.thymesecurity.security.domain.User;
 import fr.laerce.thymesecurity.security.service.JpaUserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,9 @@ public class UserController {
         assert(groupDao != null);
     }
 
-    @GetMapping("/profil")
-    public String home2(Model model){
-        model.addAttribute("user","user");
+    @GetMapping("/profil/{name}")
+    public String home2(Model model, @PathVariable("name")String name){
+        model.addAttribute("userU",jpaUserService.findByUserName(name));
         model.addAttribute("users",jpaUserService.findAll());
         return "profil";
     }
@@ -38,11 +39,17 @@ public class UserController {
         return "editpassword";
     }
     @GetMapping("/mod")
-    public String modpassword(@RequestParam("id") long id,@RequestParam("password1") String password1,@RequestParam("password2") String password2){
+    public String modpassword(@RequestParam("id") long id,@RequestParam("password") String password,@RequestParam("password1") String password1,@RequestParam("password2") String password2){
     if (password1.equals(password2)){
+
         User user = jpaUserService.findByUserId(id);
-        user.setPassword(password1);
-        jpaUserService.save(user);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        if (passwordEncoder.matches(password, user.getPassword())){
+            user.setPassword(password1);
+            jpaUserService.save(user);
+        }
+
     }
         return "redirect:/editpassword/"+id;
     }
